@@ -1,6 +1,7 @@
 const API_KEY="dbe9baeb97b84973818d6c8c92f53b11";
 const url="https://newsapi.org/v2/everything?q="
 
+
 window.addEventListener("load",()=>fetchNews("India"));
 
 function reload(){
@@ -10,7 +11,6 @@ function reload(){
 async function fetchNews(query){
     const res= await fetch(`${url}${query}&apiKey=${API_KEY}`);
     const data= await res.json();
-   // console.log(data);
      bindData(data.articles);
  }
 
@@ -20,7 +20,7 @@ function bindData(articles){
 
     cardsContainer.innerHTML="";
 
-    articles.forEach((article) => {
+    articles?.forEach((article) => {
         if(!article.urlToImage) return;
         const cardClone = newsCardTemplate.content.cloneNode(true);   //deepcloning
         fillDataInCard(cardClone,article);
@@ -59,7 +59,6 @@ const searchButton =document.getElementById('search-button');
 const searchText=document.getElementById('search-text');
 
 searchButton.addEventListener('click',()=>{
-    console.log("saurabh kumar apndey");
     const query=searchText.value;
     console.log(query);
     if(!query) return;
@@ -67,3 +66,13 @@ searchButton.addEventListener('click',()=>{
     curSelectedNav?.classList.remove('active');
     curSelectedNav=null;
 });
+
+const darkMode=document.querySelector(".dark-mode");
+const body=document.body;
+const navDark=document.querySelector("nav");
+
+darkMode.addEventListener('click',()=>{
+    body.classList.toggle('dark-mode');
+    darkMode.classList.toggle('dark-mode');
+    navDark.classList.toggle('nav-dark')
+})
